@@ -10,7 +10,11 @@ module.exports = grammar({
   rules: {
     source: ($) =>
       seq(
-        repeat(choice($.block, seq(optional($._line), NEWLINE))),
+        repeat(choice(
+          $.block,
+          seq(optional($._line), NEWLINE),
+          $._line_with_newline
+        )),
         optional($._line)
       ),
 
@@ -23,10 +27,14 @@ module.exports = grammar({
         $.old_file,
         $.new_file,
         $.location,
+        $.comment
+      ),
+
+    _line_with_newline: ($) =>
+      choice(
         $.addition,
         $.deletion,
         $.context,
-        $.comment
       ),
 
     block: ($) =>
@@ -60,7 +68,7 @@ module.exports = grammar({
         repeat1(
           seq(
             choice($.addition, $.deletion, $.context),
-            prec.right(repeat1(NEWLINE))
+            prec.right(repeat(NEWLINE))
           )
         )
       ),
@@ -89,21 +97,22 @@ module.exports = grammar({
 
     addition: ($) =>
       choice(
-        iseq("+", optional(ANYTHING)),
-        iseq("++", optional(ANYTHING)),
-        iseq("+++"),
-        iseq("++++", optional(ANYTHING))
+        iseq("+", $.content),
+        iseq("++", $.content),
+        iseq("+++", NEWLINE),
+        iseq("++++", $.content)
       ),
     deletion: ($) =>
       choice(
-        iseq("-", optional(ANYTHING)),
-        iseq("--", optional(ANYTHING)),
-        iseq("---"),
-        iseq("----", optional(ANYTHING))
+        iseq("-", $.content),
+        iseq("--", $.content),
+        iseq("---", NEWLINE),
+        iseq("----", $.content)
       ),
 
-    context: ($) => token(prec(-1, ANYTHING)),
+    context: ($) => iseq(/[^\r\n]/, $.content),
     comment: ($) => iseq("#", optional(ANYTHING)),
+    content: ($) => /[^\r\n]*\r?\n/,
 
     linerange: ($) => /[-\+]\d+(,\d+)?/,
     filename: ($) => repeat1(/\S+/),

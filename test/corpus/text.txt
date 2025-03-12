@@ -37,14 +37,24 @@ index dc36969..f37fde0 100644
           (linerange)
           (linerange))
         (changes
-          (context)
-          (context)
-          (deletion)
-          (addition)
-          (addition)
-          (addition)
-          (context)
-          (context))))))
+          (context
+            (content))
+          (context
+            (content))
+          (context
+            (content))
+          (deletion
+            (content))
+          (addition
+            (content))
+          (addition
+            (content))
+          (addition
+            (content))
+          (context
+            (content))
+          (context
+            (content)))))))
 
 ================================================================================
 New empty file
@@ -154,8 +164,10 @@ index 00000000..ee9808dc
           (linerange)
           (linerange))
         (changes
-          (addition)
-          (context))))))
+          (addition
+            (content))
+          (context
+            (content)))))))
 
 ================================================================================
 Just a file declaration and no newline
@@ -219,13 +231,24 @@ index 321c90a..b4a5cba 100644
           (linerange)
           (linerange))
         (changes
-          (context)
-          (context)
-          (context)
-          (deletion)
-          (addition)
-          (addition)
-          (context)))))
+          (context
+            (content))
+          (context
+            (content))
+          (context
+            (content))
+          (deletion
+            (content))
+          (addition
+            (content))
+          (addition
+            (content))
+          (context
+            (content))
+          (context
+            (content))
+          (context
+            (content))))))
   (block
     (command
       (argument)
@@ -244,14 +267,22 @@ index 321c90a..b4a5cba 100644
           (linerange)
           (linerange))
         (changes
-          (context)
-          (context)
-          (addition)
-          (addition)
-          (addition)
-          (addition)
-          (addition)
-          (addition))))))
+          (context
+            (content))
+          (context
+            (content))
+          (addition
+            (content))
+          (addition
+            (content))
+          (addition
+            (content))
+          (addition
+            (content))
+          (addition
+            (content))
+          (addition
+            (content)))))))
 
 ================================================================================
 Leading dash deletions
@@ -264,10 +295,13 @@ Leading dash deletions
 --------------------------------------------------------------------------------
 
 (source
+  (deletion
+    (content))
   (deletion)
-  (deletion)
-  (deletion)
-  (deletion))
+  (deletion
+    (content))
+  (deletion
+    (content)))
 
 ================================================================================
 Leading plus additions
@@ -280,10 +314,14 @@ Leading plus additions
 --------------------------------------------------------------------------------
 
 (source
-  (addition)
-  (addition)
-  (addition)
-  (addition))
+  (addition
+    (content))
+  (addition
+    (content))
+  (addition
+    (content))
+  (addition
+    (content)))
 
 ================================================================================
 File mode changes
@@ -319,9 +357,12 @@ Comments
 
 (source
   (comment)
-  (context)
+  (context
+    (content))
   (comment)
-  (context)
+  (context
+    (content))
   (comment)
   (comment)
-  (context))
+  (context
+    (content)))
